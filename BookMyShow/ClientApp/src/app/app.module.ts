@@ -7,20 +7,16 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { MovieDetailsComponent } from './movie-details/movie-details.component';
-import { ShowTimingsComponent } from './show-timings/show-timings.component';
-import { SeatBookingComponent } from './seat-booking/seat-booking.component';
-import { TicketBookingComponent } from './ticket-booking/ticket-booking.component';
+import { CounterComponent } from './counter/counter.component';
+import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    MovieDetailsComponent,
-    ShowTimingsComponent,
-    SeatBookingComponent,
-    TicketBookingComponent
+    CounterComponent,
+    FetchDataComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,10 +24,8 @@ import { TicketBookingComponent } from './ticket-booking/ticket-booking.componen
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'MovieDetails/:id', component: MovieDetailsComponent },
-      { path: 'MovieDetails/:id/Shows', component: ShowTimingsComponent },
-      { path: 'MovieDetails/:id/Shows/:showId', component: SeatBookingComponent },
-      { path: 'MovieDetails/:id/Shows/:showId/Ticket', component: TicketBookingComponent },
+      { path: 'counter', component: CounterComponent },
+      { path: 'fetch-data', component: FetchDataComponent },
     ])
   ],
   providers: [],
