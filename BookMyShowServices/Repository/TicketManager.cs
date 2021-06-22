@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Models.ViewModels;
 
 namespace Services.Repository
 {
@@ -29,7 +30,7 @@ namespace Services.Repository
             };
             await _dbConnection.ExecuteAsync(sql, param);
         }
-        public async Task GenerateTickets(dynamic TicketInfo)
+        public async Task GenerateTickets(TicketInfo TicketInfo)
         {
             string sql = "SELECT Id FROM Ticket ORDER BY Id DESC";
             var ticketId = (await _dbConnection.QueryAsync<int>(sql)).FirstOrDefault();

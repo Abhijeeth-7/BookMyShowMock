@@ -45,10 +45,9 @@ namespace Services.Repository
 
             return seatingData.ToList();
         }
-        public async Task<string> UpdateSeatingData(int id, dynamic selectedSeatIds)
+        public async Task<string> UpdateSeatingData(int id, List<string> selectedSeatIds)
         {
             List<Seat> seatingData = await GetSeatingData(id);
-            selectedSeatIds = selectedSeatIds.ToObject<List<string>>();
             IEnumerable<Seat> selectedSeats = seatingData.Where(s => selectedSeatIds.Contains(s.Id));
             foreach(Seat seat in selectedSeats)
             {
