@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookMyShow", "BookMyShow\BookMyShow.csproj", "{3CBB477A-10ED-491E-B44E-A5243C6CB9F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMyShowModels", "BookMyShowModels\BookMyShowModels.csproj", "{FF11AB5A-AF78-4068-BC7C-DFAB7EDAD489}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "BookMyShowModels\Models.csproj", "{FF11AB5A-AF78-4068-BC7C-DFAB7EDAD489}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMyShowServices", "BookMyShowServices\BookMyShowServices.csproj", "{95F6BE23-2AF9-4389-B830-106EAA3FEF16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "BookMyShowServices\Services.csproj", "{95F6BE23-2AF9-4389-B830-106EAA3FEF16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
