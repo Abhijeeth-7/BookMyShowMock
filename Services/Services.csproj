@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BookMyShowModels\BookMyShowModels.csproj" />
+    <ProjectReference Include="..\BookMyShowModels\Models.csproj" />
   </ItemGroup>
 
 </Project>
