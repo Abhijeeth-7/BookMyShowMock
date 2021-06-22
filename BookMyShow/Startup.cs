@@ -1,10 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Services.Data;
+using Services.Interfaces;
+using Services.Repository;
+using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace BookMyShow
 {
@@ -20,12 +24,20 @@ namespace BookMyShow
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllers().AddNewtonsoftJson(options => {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.MaxDepth = 5;
+            });
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddTransient<IDBContext, DapperDBContext>();
+            services.AddTransient<ITicketManager, TicketManager>();
+            services.AddTransient<IMovieManager, MovieManager>();
+            services.AddTransient<IShowManager, ShowManager>();
+            services.AddTransient<ITheaterManager, TheaterManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +67,7 @@ namespace BookMyShow
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                    pattern: "{controller}/{id?}");
             });
 
             app.UseSpa(spa =>
