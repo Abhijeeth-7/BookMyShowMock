@@ -45,25 +45,5 @@ namespace Services.Repository
                 ticket.Id += 1;
             }
         }
-
-        public Task<List<Ticket>> GetExpiredTickets()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<List<Movie>> GetTickets()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Ticket>> GetValidTickets()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> ValidateTicket(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

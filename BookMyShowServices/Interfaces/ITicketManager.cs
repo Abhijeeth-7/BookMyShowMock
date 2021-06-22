@@ -11,10 +11,10 @@ namespace Services.Interfaces
     {
         public Task GenerateTicket(Ticket Ticket);
         public Task GenerateTickets(dynamic TicketInfo);
-        public Task<List<Movie>> GetTickets();
-        public Task<List<Ticket>> GetValidTickets();
-        public Task<List<Ticket>> GetExpiredTickets();
-        public Task<bool> ValidateTicket(int id);
+        //public Task<List<Ticket>> GetTickets();
+        //public Task<List<Ticket>> GetValidTickets();
+        //public Task<List<Ticket>> GetExpiredTickets();
+        //public Task<bool> ValidateTicket(int id);
 
     }
 }

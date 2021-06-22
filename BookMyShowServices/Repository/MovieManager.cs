@@ -21,14 +21,14 @@ namespace Services.Repository
         public async Task<Movie> GetMovie(int id)
         {
             var parameters = new { id = id, };
-            string sql = "select * from Movie where id = @id";
+            string sql = "SELECT * FROM Movie WHERE id = @id";
             Movie movie = await _dbConnection.QueryFirstAsync<Movie>(sql, parameters);
             movie.Genre = ((Genre)Convert.ToInt32(movie.Genre)).ToString();
             return movie;
         }
         public async Task<IEnumerable<Movie>> GetMovies()
         {
-            string sql = "select * from Movie";
+            string sql = "SELECT * FROM Movie";
             var movies = await _dbConnection.QueryAsync<Movie>(sql);
             return movies.ToList();
         }

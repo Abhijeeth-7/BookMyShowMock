@@ -62,36 +62,6 @@ namespace Services.Repository
 
             return "working";
         }
-
-        public Task<List<Show>> GetShowsInPLay()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Show>> GetValidShows()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task setShowEndTime(int movieId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task setShowStartTime(int movieId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task CreateShow(int movieId, int ScreenId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Show>> GetExpiredShows()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 public class CustomBooleanJsonConverter : JsonConverter<bool>
