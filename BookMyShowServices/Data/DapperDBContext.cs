@@ -1,7 +1,7 @@
 ﻿using Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System.Data;
-using Microsoft.Data.SqlClient;
+using System.Data.SqlClient;
 
 namespace Services.Data
 {

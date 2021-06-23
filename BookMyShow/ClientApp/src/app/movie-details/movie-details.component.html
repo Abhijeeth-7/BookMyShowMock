@@ -1,25 +1,25 @@
 <p *ngIf="!movie">Loading...</p>
 
-<div *ngIf="movie" class="w-75 mx-auto">
-  <p class="display-4 my-4">Movie Details</p>
+<div *ngIf="movie" class="w-75 mx-auto bg-light border">
+  <p class="h3 font-weight-light bg-primary text-white p-3">Movie Details</p>
   <div class="row m-0 p-0">
-    <p class="col-2">Title</p>:
+    <p class="col-2 font-weight-bold">Title</p>:
     <p class="col-9">{{movie.title}}</p>
   </div>
   <div class="row m-0 p-0">
-    <p class="col-2">Genre</p>:
+    <p class="col-2 font-weight-bold">Genre</p>:
     <p class="col-9">{{movie.genre}}</p>
   </div>
   <div class="row m-0 p-0">
-    <p class="col-2">Duration</p>:
+    <p class="col-2 font-weight-bold">Duration</p>:
     <p class="col-9">{{ +(movie.duration | slice:0:2) }} Hours {{ +(movie.duration | slice:3:5)}} Minutes</p>
   </div>
   <div class="row m-0 p-0">
-    <p class="col-2">Description</p>:
+    <p class="col-2 font-weight-bold">Description</p>:
     <p class="col-9">{{movie.description}}</p>
   </div>
   <div class="row mx-0 my-4 p-0 col-11">
-    <button class="btn btn-primary rounded-pill ml-auto">Go Back</button>
+    <button class="btn btn-primary rounded-pill ml-auto" routerLink="/">Go Back</button>
     <button class="btn btn-primary rounded-pill mx-2" (click)="bookTheShow(movie.id)">BookMyShow</button>
   </div>
 </div>

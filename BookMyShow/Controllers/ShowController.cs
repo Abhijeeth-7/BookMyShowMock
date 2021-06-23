@@ -23,17 +23,17 @@ namespace BookMyShow.Controllers
         }
         // GET: api/<ShowController>
         [HttpGet]
-        public async Task<List<dynamic>> Get()
+        public async Task<List<dynamic>> Get(int movieId)
         {
             List<dynamic> result = new List<dynamic>();
-            result.Add(await _showManager.GetShows());
+            result.Add(await _showManager.GetShows(movieId));
             result.Add(await _theaterManager.GetTheaters());
             return result;
         }
 
         // GET api/<ShowController>/5
         [HttpGet("{id}")]
-        public async Task<List<Seat>> Get(int id)
+        public async Task<List<Seat>> GetShow(int id)
         {
             return await _showManager.GetSeatingData(id);
         }

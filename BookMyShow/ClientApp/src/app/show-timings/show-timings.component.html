@@ -1,10 +1,10 @@
 <p *ngIf="!theaters">Loading...</p>
 
-<div *ngIf="theaters" class="w-75 mx-auto">
-  <h5>Watch Movie at...</h5>
-  <div *ngFor="let theater of theaters" class="row m-0 p-5">
-    <p class="col-12">{{theater.theaterName}}</p>
-    <div class="row mx-5 p-0">
+<div *ngIf="theaters" class="w-50 mx-auto">
+  <h5 class="mx-2">Watch Movie at...</h5>
+  <div *ngFor="let theater of theaters" class="row m-0 p-0 text-white">
+    <p class="col-12 bg-primary p-2 mb-0">{{theater.theaterName}}</p>
+    <div class="col-12 row py-3 m-0 mb-3 bg-light">
       <div *ngFor="let show of shows" class="row m-0 p-0">
         <button *ngIf="show.theaterId==theater.id"
                 class="col mx-2 btn btn-sm btn-outline-primary rounded-pill"

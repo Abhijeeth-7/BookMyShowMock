@@ -18,10 +18,11 @@ namespace Services.Repository
         {
             _dbConnection = context.Connection();
         }
-        public async Task<List<Show>> GetShows()
+        public async Task<List<Show>> GetShows(int movieId)
         {
-            string sql = "select * from Show";
-            var shows = await _dbConnection.QueryAsync<Show>(sql);
+            string sql = "select * from Show where MovieId = @id";
+            var param = new { id = movieId };
+            var shows = await _dbConnection.QueryAsync<Show>(sql, param);
             return shows.ToList();
         }
         public async Task<Show> GetShow(int showId)
@@ -45,7 +46,7 @@ namespace Services.Repository
 
             return seatingData.ToList();
         }
-        public async Task<string> UpdateSeatingData(int id, List<string> selectedSeatIds)
+        public async Task<string> UpdateSeatingData(int id, dynamic selectedSeatIds)
         {
             List<Seat> seatingData = await GetSeatingData(id);
             IEnumerable<Seat> selectedSeats = seatingData.Where(s => selectedSeatIds.Contains(s.Id));
