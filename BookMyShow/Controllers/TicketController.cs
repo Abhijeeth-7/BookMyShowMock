@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Models.ViewModels;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -46,7 +47,7 @@ namespace BookMyShow.Controllers
         }
         // POST api/<TicketController>
         [HttpPost]
-        public async void Post(int showId, [FromBody] dynamic ticket)
+        public async void Post(int showId, [FromBody] TicketInfo ticket)
         {
             await _ticketManager.GenerateTickets(ticket);
             await _showManager.UpdateSeatingData(showId, ticket.SeatIds);
