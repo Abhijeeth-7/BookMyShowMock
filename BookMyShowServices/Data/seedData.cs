@@ -90,7 +90,6 @@ namespace Services.Data
                 await _dbConnection.ExecuteAsync(sql,param);
             }
         }
-
         public static async Task InsertShows() {
             await _dbConnection.ExecuteAsync("DELETE FROM [dbo].[Show]");
             List<Show> shows = new List<Show>

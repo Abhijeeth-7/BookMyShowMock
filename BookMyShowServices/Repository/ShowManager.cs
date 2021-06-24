@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Services.Repository
@@ -46,12 +45,16 @@ namespace Services.Repository
 
             return seatingData.ToList();
         }
-        public async Task<string> UpdateSeatingData(int id, dynamic selectedSeatIds)
+        public async Task<bool> UpdateSeatingData(int id, List<string> selectedSeatIds)
         {
             List<Seat> seatingData = await GetSeatingData(id);
             IEnumerable<Seat> selectedSeats = seatingData.Where(s => selectedSeatIds.Contains(s.Id));
             foreach(Seat seat in selectedSeats)
             {
+                if (seat.IsAvailable == 0)
+                {
+                    return false;
+                }
                 seat.IsAvailable = 0;
             }
 
@@ -59,8 +62,7 @@ namespace Services.Repository
             var sql = "UPDATE Seating SET SeatingData = @seatingData WHERE ShowId = @showId";
             var param = new { showId = id, seatingData = json, };
             await _dbConnection.QueryAsync<Seating>(sql, param);
-
-            return "working";
+            return true;
         }
     }
 }
