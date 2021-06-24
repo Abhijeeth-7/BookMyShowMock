@@ -1,15 +1,15 @@
  import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '../shared.service';
+import { OrderSummary, Ticket } from '../viewModels/viewModels';
 
 @Component({
   selector: 'app-ticket-booking',
   templateUrl: './ticket-booking.component.html',
-  styleUrls: ['./ticket-booking.component.css']
 })
 export class TicketBookingComponent implements OnInit {
 
-    orderSummary: any;
+    orderSummary: OrderSummary;
     ticket: Ticket = new Ticket();
     date: string;
     id: string;
@@ -28,7 +28,7 @@ export class TicketBookingComponent implements OnInit {
     this.sharedService.GetOrderSummary(+this.id, +this.showId).subscribe(result => {
       this.orderSummary = result;
       this.orderSummary.seatIds = this.seatIds;
-      this.orderSummary.totalPrice = this.orderSummary.ticketPrice * this.orderSummary.seatIds.split(',').length
+      this.orderSummary.totalPrice = this.orderSummary.ticketPrice * this.orderSummary.seatIds.split(',').length;
     }, error => console.error(error));
   }
 
@@ -59,11 +59,4 @@ export class TicketBookingComponent implements OnInit {
     });
     this.ticket.price = this.orderSummary.ticketPrice;
   }
-}
-
-class Ticket {
-  id: number;
-  showId: number;
-  seatIds: string[];
-  price: number;
 }

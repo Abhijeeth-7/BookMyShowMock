@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { SharedService } from '../shared.service';
+import { Movie } from '../viewModels/viewModels';
 
 @Component({
   selector: 'app-home',
@@ -9,9 +9,9 @@ import { SharedService } from '../shared.service';
 })
 export class HomeComponent {
 
-  public movies: any[];
+  public movies: Movie[];
 
-  constructor(private sharedService: SharedService, private route: ActivatedRoute, private router: Router) {  }
+  constructor(private sharedService: SharedService, private router: Router) {  }
 
   ngOnInit(): void {
     this.sharedService.getMovies().subscribe(result => {

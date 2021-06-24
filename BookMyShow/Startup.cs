@@ -38,7 +38,6 @@ namespace BookMyShow
 
             services.AddControllers().AddNewtonsoftJson(options => {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                options.SerializerSettings.MaxDepth = 5;
             });
             services.AddTransient<IDBContext, DapperDBContext>();
             services.AddTransient<ITicketManager, TicketManager>();

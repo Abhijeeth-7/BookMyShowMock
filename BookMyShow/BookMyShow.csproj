@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\viewModels\viewModels.ts" />
     <None Remove="Scripts\001_CreateMovietable.sql" />
     <None Remove="Scripts\002_CreateSeatTable.sql" />
     <None Remove="Scripts\003_CreateSeatingTable.sql" />
@@ -47,6 +48,10 @@
   <ItemGroup>
     <ProjectReference Include="..\BookMyShowModels\Models.csproj" />
     <ProjectReference Include="..\BookMyShowServices\Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\viewModels\viewModels.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

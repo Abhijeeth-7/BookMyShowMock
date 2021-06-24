@@ -1,12 +1,11 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../shared.service';
+import { Movie } from '../viewModels/viewModels';
 
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
-  styleUrls: ['./movie-details.component.css']
 })
 export class MovieDetailsComponent implements OnInit {
 
@@ -26,11 +25,4 @@ export class MovieDetailsComponent implements OnInit {
   bookTheShow(movieId: number) {
     this.router.navigate(['Shows'], { relativeTo: this.route });
   }
-}
-class Movie {
-  id: number;
-  title: string;
-  description: string;
-  genre: string;
-  duration: string;
 }

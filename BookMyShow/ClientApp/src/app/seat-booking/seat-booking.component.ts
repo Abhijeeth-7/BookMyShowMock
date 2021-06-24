@@ -1,16 +1,15 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../shared.service';
+import { Seat } from '../viewModels/viewModels';
 
 @Component({
   selector: 'app-seat-booking',
   templateUrl: './seat-booking.component.html',
-  styleUrls: ['./seat-booking.component.css']
 })
 export class SeatBookingComponent implements OnInit {
 
-    seats: Seat[];
+    public seats: Seat[];
     selectedSeatIds: string[] = [];
     id: string;
     showId: string;
@@ -49,7 +48,3 @@ export class SeatBookingComponent implements OnInit {
   }
 }
 
-class Seat {
-  Id: number;
-  isAvailable: boolean;
-}

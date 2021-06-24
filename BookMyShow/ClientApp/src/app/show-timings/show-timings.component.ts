@@ -1,17 +1,16 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../shared.service';
+import { Show, Theater } from '../viewModels/viewModels';
 
 @Component({
   selector: 'app-show-timings',
   templateUrl: './show-timings.component.html',
-  styleUrls: ['./show-timings.component.css']
 })
 export class ShowTimingsComponent implements OnInit {
 
-  shows: any[];
-  theaters: any[];
+  shows: Show[];
+  theaters: Theater[];
 
   constructor(private sharedService: SharedService, private route: ActivatedRoute, private router: Router  ) {  }
 
