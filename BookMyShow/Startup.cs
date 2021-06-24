@@ -1,3 +1,4 @@
+using DbUp;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -7,8 +8,9 @@ using Microsoft.Extensions.Hosting;
 using Services.Data;
 using Services.Interfaces;
 using Services.Repository;
-using Newtonsoft.Json;
-using System.Text.Json.Serialization;
+using System;
+using System.Linq;
+using System.Reflection;
 
 namespace BookMyShow
 {
@@ -24,20 +26,30 @@ namespace BookMyShow
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Assembly assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a=>a.FullName.Contains("Services"));
+
+            EnsureDatabase.For.SqlDatabase(Configuration.GetConnectionString("DefaultConnection"));
+            var upgradeEngine = DeployChanges.To
+                     .SqlDatabase(Configuration.GetConnectionString("DefaultConnection"))
+                     .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly(), (string s) => s.StartsWith("BookMyShow.Scripts.Migrations"))
+                     .LogToConsole()
+                     .Build();
+            upgradeEngine.PerformUpgrade();
+
             services.AddControllers().AddNewtonsoftJson(options => {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 options.SerializerSettings.MaxDepth = 5;
-            });
-            // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
             });
             services.AddTransient<IDBContext, DapperDBContext>();
             services.AddTransient<ITicketManager, TicketManager>();
             services.AddTransient<IMovieManager, MovieManager>();
             services.AddTransient<IShowManager, ShowManager>();
             services.AddTransient<ITheaterManager, TheaterManager>();
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

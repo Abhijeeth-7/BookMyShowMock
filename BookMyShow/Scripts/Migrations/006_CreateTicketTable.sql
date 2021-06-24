@@ -1,0 +1,21 @@
+/****** Object:  Table [dbo].[Ticket]    Script Date: 6/23/2021 9:16:56 PM ******/
+DROP TABLE [dbo].[Ticket]
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Ticket](
+	[Id] [int] NOT NULL,
+	[ShowId] [int] NOT NULL,
+	[SeatId] [nvarchar](5) NOT NULL,
+	[Price] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
