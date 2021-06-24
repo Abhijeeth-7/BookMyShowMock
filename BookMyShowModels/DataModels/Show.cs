@@ -13,5 +13,7 @@ namespace Models.DataModels
         public int MovieId { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
+
+        public int SeatingId { get; set; }
     }
 }
