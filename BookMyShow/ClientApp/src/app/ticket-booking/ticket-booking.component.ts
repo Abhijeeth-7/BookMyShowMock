@@ -10,18 +10,14 @@ import { SharedService } from '../shared.service';
 export class TicketBookingComponent implements OnInit {
 
     orderSummary: any;
-    ticket: any = new Object();
+    ticket: Ticket = new Ticket();
     date: string;
     id: string;
     showId: string;
     seatIds: string;
     isTicketBooked: boolean;
 
-  constructor(
-    private sharedService: SharedService,
-    private route: ActivatedRoute,
-    private router: Router
-    ) {
+  constructor(private sharedService: SharedService, private route: ActivatedRoute) {
     this.date = new Date().toUTCString().slice(0, -3);
     this.id = this.route.snapshot.paramMap.get('id');
     this.showId = this.route.snapshot.paramMap.get('showId');
@@ -46,7 +42,7 @@ export class TicketBookingComponent implements OnInit {
     return result
   }
 
-  BuyTickets() {
+  buyTickets() {
     this.createTicket();
     this.sharedService.ConfirmTicketBooking(this.ticket).subscribe(data => {
       this.isTicketBooked = true;
@@ -55,12 +51,19 @@ export class TicketBookingComponent implements OnInit {
   }
 
   createTicket() {
-    this.ticket.Id = 0;
-    this.ticket.ShowId = +this.showId;
-    this.ticket.SeatIds = []
+    this.ticket.id = 0;
+    this.ticket.showId = +this.showId;
+    this.ticket.seatIds = []
     this.orderSummary.seatIds.split(',').forEach(seatId => {
-      this.ticket.SeatIds.push(seatId);
+      this.ticket.seatIds.push(seatId);
     });
-    this.ticket.Price = this.orderSummary.ticketPrice;
+    this.ticket.price = this.orderSummary.ticketPrice;
   }
+}
+
+class Ticket {
+  id: number;
+  showId: number;
+  seatIds: string[];
+  price: number;
 }

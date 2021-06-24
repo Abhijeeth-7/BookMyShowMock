@@ -10,7 +10,7 @@ import { SharedService } from '../shared.service';
 })
 export class MovieDetailsComponent implements OnInit {
 
-  movie: any;
+    movie: Movie;
     id: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private sharedService: SharedService) { }
@@ -26,4 +26,11 @@ export class MovieDetailsComponent implements OnInit {
   bookTheShow(movieId: number) {
     this.router.navigate(['Shows'], { relativeTo: this.route });
   }
+}
+class Movie {
+  id: number;
+  title: string;
+  description: string;
+  genre: string;
+  duration: string;
 }

@@ -34,7 +34,7 @@ export class ShowTimingsComponent implements OnInit {
     return result
   }
 
-  BookTimeSlot(showId: number) {
+  bookTimeSlot(showId: number) {
     this.router.navigate(['' + showId], { relativeTo: this.route });
   }
 }

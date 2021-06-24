@@ -10,8 +10,8 @@ import { SharedService } from '../shared.service';
 })
 export class SeatBookingComponent implements OnInit {
 
-  seats: any[];
-  selectedSeatIds: string[] = [];
+    seats: Seat[];
+    selectedSeatIds: string[] = [];
     id: string;
     showId: string;
 
@@ -47,4 +47,9 @@ export class SeatBookingComponent implements OnInit {
   BookTickets() {
     this.router.navigate(['Ticket', { selectedSeats: this.selectedSeatIds }], { relativeTo: this.route })
   }
+}
+
+class Seat {
+  Id: number;
+  isAvailable: boolean;
 }
