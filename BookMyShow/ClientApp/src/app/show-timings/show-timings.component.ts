@@ -16,10 +16,9 @@ export class ShowTimingsComponent implements OnInit {
 
   ngOnInit() {
     let id = this.route.snapshot.paramMap.get('id');
-    this.sharedService.getShows(+id).subscribe(result => {
-      this.shows = result[0];
-      this.theaters = result[1];
-      console.log(this.shows[0].startTime)
+    this.sharedService.getShows(+id).subscribe((result: {[index:string]:any} )=> {
+      this.shows = result.item1;
+      this.theaters = result.item2;
     }, error => console.error(error));
   }
 

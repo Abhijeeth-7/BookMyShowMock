@@ -16,10 +16,6 @@ export class SharedService {
     this.baseUrl = baseUrl;
   }
 
-  GetOrderSummary(id: number, showId: number): Observable<OrderSummary> {
-    return this.http.get<OrderSummary>(this.baseUrl + 'Movie/' + id + '/Show/' + showId + '/Ticket');
-  }
-
   getMovies(): Observable<Movie[]> {
     return this.http.get<Movie[]>(this.baseUrl + 'Movie');
   }
@@ -36,6 +32,10 @@ export class SharedService {
   getSeatingPlan(id: number, showId: number): Observable<Seat[]> {
     this.showId = showId;
     return this.http.get<Seat[]>(this.baseUrl + 'Movie/' + this.id + '/Show/' + this.showId);
+  }
+
+  GetOrderSummary(id: number, showId: number): Observable<OrderSummary> {
+    return this.http.get<OrderSummary>(this.baseUrl + 'Movie/' + id + '/Show/' + showId + '/Ticket');
   }
 
   ConfirmTicketBooking(body: Object): Observable<void> {
