@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace BookMyShow.Controllers
 {
-    [Route("Movie/{movieId}/[controller]")]
     [ApiController]
+    [Route("Movie/{movieId}/Show")]
     public class ShowController : ControllerBase
     {
         private IShowManager _showManager;
@@ -21,17 +21,15 @@ namespace BookMyShow.Controllers
             _showManager = showManager;
             _theaterManager = theaterManager;
         }
-        // GET: api/<ShowController>
-        [HttpGet]
-        public async Task<List<dynamic>> Get(int movieId)
+        public async Task<Tuple<List<Show>,List<Theater>>> Get(int movieId)
         {
-            List<dynamic> result = new List<dynamic>();
-            result.Add(await _showManager.GetShows(movieId));
-            result.Add(await _theaterManager.GetTheaters());
+            Tuple<List<Show>, List<Theater>> result = new Tuple<List<Show>, List<Theater>>(
+                await _showManager.GetShows(movieId), 
+                await _theaterManager.GetTheaters()
+                );
             return result;
         }
 
-        // GET api/<ShowController>/5
         [HttpGet("{id}")]
         public async Task<List<Seat>> GetShow(int id)
         {

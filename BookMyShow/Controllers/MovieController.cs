@@ -18,7 +18,6 @@ namespace BookMyShow.Controllers
         {
             _movieManager = movieManager; 
         }
-        [HttpGet]
         public async Task<IEnumerable<Movie>> Get()
         {
             return await _movieManager.GetMovies();

@@ -13,7 +13,7 @@ using Models.ViewModels;
 namespace BookMyShow.Controllers
 {
     [ApiController]
-    [Route("Movie/{id}/Show/{showId}/TicketController")]
+    [Route("Movie/{movieId}/Show/{showId}/Ticket")]
     public class TicketController : ControllerBase
     {
         private IShowManager _showManager;
@@ -27,6 +27,7 @@ namespace BookMyShow.Controllers
             _ticketManager = ticketManager;
             _movieManager = movieManager;
         }
+        [HttpGet("")]
         public async Task<OrderSummary> GetOrderSummary(int showId)
         {
             Show show = await _showManager.GetShow(showId);
@@ -35,17 +36,19 @@ namespace BookMyShow.Controllers
 
             string movieTitle = (await _movieManager.GetMovie(show.MovieId)).Title;
             return new OrderSummary{
-                movieTitle = movieTitle,
-                theaterName = theater.TheaterName,
-                showStartTime = show.StartTime,
-                showEndTime = show.EndTime,
-                ticketPrice = theater.Price
+                    movieTitle = movieTitle,
+                    theaterName = theater.TheaterName,
+                    showStartTime = show.StartTime,
+                    showEndTime = show.EndTime,
+                    ticketPrice = theater.Price
                 };
         }
         public async void PostTicket(int showId, TicketInfo ticket)
         {
-            await _ticketManager.GenerateTickets(ticket);
-            await _showManager.UpdateSeatingData(showId, ticket.SeatIds);
+            if(await _showManager.UpdateSeatingData(showId, ticket.SeatIds))
+            {
+                await _ticketManager.GenerateTickets(ticket);
+            }
         }
     }; 
 }
