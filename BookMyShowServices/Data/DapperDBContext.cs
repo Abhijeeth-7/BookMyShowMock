@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
+
 namespace Services.Data
 {
     public class DapperDBContext : IDBContext
@@ -12,6 +13,7 @@ namespace Services.Data
         public DapperDBContext(IConfiguration config)
         {
             _config = config;
+            
         }
 
         public IDbConnection Connection()
