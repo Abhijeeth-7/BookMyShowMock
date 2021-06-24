@@ -3,7 +3,7 @@
   <div class="mx-auto col-7">
     <div class="row py-4 m-0">
       <h5 class="col-6 h3 font-weight-light">Book Your Seats</h5>
-      <button [disabled]="this.selectedSeatIds.length==0" class="ml-auto mr-2 col-2 w-100 btn btn-outline-light rounded-pill" (click)="BookTickets()">
+      <button [disabled]="this.selectedSeatIds.length==0" class="ml-auto mr-2 col-2 w-100 btn btn-outline-light rounded-pill" (click)="bookTickets()">
         Buy Tickets
       </button>
     </div>
@@ -16,11 +16,14 @@
 
     <div>
       <button *ngFor="let seat of seats"
-              #seatIdentfier
-              class="btn-outline-light btn seat"
               [disabled]="seat.isAvailable==0"
-
-              (click)="toggleSeatSelection(seat.id, seatIdentfier)">
+              [ngClass]="{
+                   seat: true,
+                    btn:true,
+                   'btn-outline-light': this.selectedSeatIds.indexOf(seat.id)==-1,
+                   'btn-success': this.selectedSeatIds.indexOf(seat.id)!=-1
+              }"
+              (click)="toggleSeatSelection(seat.id)">
         {{seat.id}}
       </button>
     </div>

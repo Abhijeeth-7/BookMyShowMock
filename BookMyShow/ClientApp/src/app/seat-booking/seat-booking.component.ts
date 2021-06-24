@@ -32,18 +32,9 @@ export class SeatBookingComponent implements OnInit {
     else {
       this.selectedSeatIds.splice(index, 1);
     }
-    console.log(this.selectedSeatIds);
-    if (obj.style.backgroundColor == "yellowgreen") {
-      obj.style.backgroundColor = ""
-      obj.style.color = ""
-    }
-    else {
-      obj.style.backgroundColor = "yellowgreen"
-      obj.style.color = "white"
-    }
   }
 
-  BookTickets() {
+  bookTickets() {
     this.router.navigate(['Ticket', { selectedSeats: this.selectedSeatIds }], { relativeTo: this.route })
   }
 }
