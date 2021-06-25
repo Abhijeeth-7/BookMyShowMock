@@ -40,6 +40,6 @@ export class OrderSummary {
   showStartTime: string;
   showEndTime: string;
   ticketPrice: number;
-  seatIds: string;
+  seatIds: string[];
   totalPrice: number;
 }

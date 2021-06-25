@@ -10,19 +10,18 @@ import { Movie } from '../viewModels/viewModels';
 export class MovieDetailsComponent implements OnInit {
 
     movie: Movie;
-    id: string;
 
-  constructor(private route: ActivatedRoute, private router: Router, private sharedService: SharedService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private sharedService: SharedService) {  }
 
   //change the life hook to avoid errors while coming to this page
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.sharedService.getMovie(+this.id).subscribe(result => {
+    let id = history.state.movieId;
+    this.sharedService.getMovie(id).subscribe(result => {
       this.movie = result;
     }, error => console.error(error));
   }
 
-  bookTheShow(movieId: number) {
-    this.router.navigate(['Shows'], { relativeTo: this.route });
+  bookTheShow() {
+    this.router.navigate(['Shows'], { state: { movieId: this.movie.id}, relativeTo: this.route });
   }
 }

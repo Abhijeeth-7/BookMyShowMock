@@ -28,10 +28,10 @@ import { TicketBookingComponent } from './ticket-booking/ticket-booking.componen
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'MovieDetails/:id', component: MovieDetailsComponent },
-      { path: 'MovieDetails/:id/Shows', component: ShowTimingsComponent },
-      { path: 'MovieDetails/:id/Shows/:showId', component: SeatBookingComponent },
-      { path: 'MovieDetails/:id/Shows/:showId/Ticket', component: TicketBookingComponent },
+      { path: 'MovieDetails/:name', component: MovieDetailsComponent },
+      { path: 'MovieDetails/:name/Shows', component: ShowTimingsComponent },
+      { path: 'MovieDetails/:name/Shows/:showId', component: SeatBookingComponent },
+      { path: 'MovieDetails/:name/Shows/:showId/Ticket', component: TicketBookingComponent },
     ])
   ],
   providers: [],

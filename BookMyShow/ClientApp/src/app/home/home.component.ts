@@ -19,8 +19,8 @@ export class HomeComponent {
     }, error => console.error(error));
   }
 
-  selectMovie(movieId: number) {
-    this.router.navigate(['/MovieDetails', movieId]);
+  selectMovie(movie: Movie) {
+    this.router.navigate(['/MovieDetails', movie.title], { state: { movieId: movie.id } });
   }
 
 }

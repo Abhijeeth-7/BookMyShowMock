@@ -12,18 +12,17 @@ export class ShowTimingsComponent implements OnInit {
   shows: Show[];
   theaters: Theater[];
 
-  constructor(private sharedService: SharedService, private route: ActivatedRoute, private router: Router  ) {  }
+  constructor(private sharedService: SharedService, private route: ActivatedRoute, private router: Router) {  }
 
   ngOnInit() {
-    let id = this.route.snapshot.paramMap.get('id');
-    this.sharedService.getShows(+id).subscribe((result: {[index:string]:any} )=> {
+    this.sharedService.getShows().subscribe((result: { [index: string]: any }) => {
       this.shows = result.item1;
       this.theaters = result.item2;
     }, error => console.error(error));
   }
 
   getTime(time: string) {
-    let hours: any = +time.slice(0, 2);
+    let hours: number|string = +time.slice(0, 2);
     let period = (hours >= 12) ? ' PM' : ' AM';
     hours = (hours > 12) ? hours - 12 : hours;
     hours = (hours < 10) ? '0' + hours : hours;
@@ -33,6 +32,6 @@ export class ShowTimingsComponent implements OnInit {
   }
 
   bookTimeSlot(showId: number) {
-    this.router.navigate(['' + showId], { relativeTo: this.route });
+    this.router.navigate([showId], { state: { showId: showId }, relativeTo: this.route });
   }
 }

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
-import { Movie, OrderSummary, Seat, Show } from './viewModels/viewModels';
+import { Movie, OrderSummary, Seat, Show, Ticket } from './viewModels/viewModels';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,10 @@ import { Movie, OrderSummary, Seat, Show } from './viewModels/viewModels';
 export class SharedService {
 
   private readonly baseUrl;
-  id: number;
+  movieId: number;
   showId: number;
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private activatedRoute: ActivatedRoute) {
     this.baseUrl = baseUrl;
   }
 
@@ -20,25 +21,25 @@ export class SharedService {
     return this.http.get<Movie[]>(this.baseUrl + 'Movie');
   }
 
-  getMovie(id: number): Observable<Movie> {
-    this.id = id
-    return this.http.get<Movie>(this.baseUrl + 'Movie/'+this.id);
+  getMovie(movieId?: number): Observable<Movie> {
+    this.movieId = movieId || this.movieId;
+    return this.http.get<Movie>(this.baseUrl + 'Movie/' + this.movieId);
   }
 
-  getShows(id: number): Observable<any[]> {
-    return this.http.get<any[]>(this.baseUrl + 'Movie/' + this.id + '/Show');
+  getShows(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + 'Movie/' + this.movieId + '/Show');
   }
 
-  getSeatingPlan(id: number, showId: number): Observable<Seat[]> {
-    this.showId = showId;
-    return this.http.get<Seat[]>(this.baseUrl + 'Movie/' + this.id + '/Show/' + this.showId);
+  getSeatingPlan(showId?: number): Observable<Seat[]> {
+    this.showId = showId || this.showId;
+    return this.http.get<Seat[]>(this.baseUrl + 'Movie/' + this.movieId + '/Show/' + this.showId);
   }
 
-  GetOrderSummary(id: number, showId: number): Observable<OrderSummary> {
-    return this.http.get<OrderSummary>(this.baseUrl + 'Movie/' + id + '/Show/' + showId + '/Ticket');
+  GetOrderSummary(): Observable<OrderSummary> {
+    return this.http.get<OrderSummary>(this.baseUrl + 'Movie/' + this.movieId + '/Show/' + this.showId + '/Ticket');
   }
 
-  ConfirmTicketBooking(body: Object): Observable<void> {
-    return this.http.post<void>(this.baseUrl + 'Movie/' + this.id + '/Show/' + this.showId + '/Ticket', body);
+  ConfirmTicketBooking(ticket: Ticket): Observable<void> {
+    return this.http.post<void>(this.baseUrl + 'Movie/' + this.movieId + '/Show/' + this.showId + '/Ticket', ticket);
   }
 }

@@ -1,10 +1,6 @@
 ﻿using Models.DataModels;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Models.ViewModels;
 

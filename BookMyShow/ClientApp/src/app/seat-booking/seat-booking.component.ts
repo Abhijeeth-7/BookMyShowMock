@@ -11,20 +11,17 @@ export class SeatBookingComponent implements OnInit {
 
     public seats: Seat[];
     selectedSeatIds: string[] = [];
-    id: string;
-    showId: string;
 
   constructor(private sharedService: SharedService, private route: ActivatedRoute, private router: Router) {  }
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.showId = this.route.snapshot.paramMap.get('showId');
-    this.sharedService.getSeatingPlan(+this.id, +this.showId).subscribe(result => {
+    let showId = history.state.showId;
+    this.sharedService.getSeatingPlan(showId).subscribe(result => {
       this.seats = result;
     }, error => console.error(error));
   }
 
-  toggleSeatSelection(seatId: string, obj: HTMLButtonElement) {
+  toggleSeatSelection(seatId: string) {
     let index = this.selectedSeatIds.indexOf(seatId);
     if (index == -1) {
       this.selectedSeatIds.push(seatId);
@@ -35,7 +32,12 @@ export class SeatBookingComponent implements OnInit {
   }
 
   bookTickets() {
-    this.router.navigate(['Ticket', { selectedSeats: this.selectedSeatIds }], { relativeTo: this.route })
+    this.router.navigate(['Ticket'], {
+      state: {
+        selectedSeats: this.selectedSeatIds
+      },
+      relativeTo: this.route
+    })
   }
 }
 
