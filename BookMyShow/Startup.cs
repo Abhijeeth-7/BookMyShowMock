@@ -1,10 +1,17 @@
+using DbUp;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Services.Data;
+using Services.Interfaces;
+using Services.Repository;
+using System;
+using System.Linq;
+using System.Reflection;
+using System.Web.Http;
 
 namespace BookMyShow
 {
@@ -20,7 +27,24 @@ namespace BookMyShow
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            //Assembly assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a=>a.FullName.Contains("Services"));
+
+            EnsureDatabase.For.SqlDatabase(Configuration.GetConnectionString("DefaultConnection"));
+            var upgradeEngine = DeployChanges.To
+                     .SqlDatabase(Configuration.GetConnectionString("DefaultConnection"))
+                     .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly(), (string s) => s.StartsWith("BookMyShow.Scripts.Migrations"))
+                     .LogToConsole()
+                     .Build();
+            upgradeEngine.PerformUpgrade();
+
+            services.AddControllers().AddNewtonsoftJson(options => {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+            services.AddTransient<IDBContext, DapperDBContext>();
+            services.AddTransient<ITicketManager, TicketManager>();
+            services.AddTransient<IMovieManager, MovieManager>();
+            services.AddTransient<IShowManager, ShowManager>();
+            services.AddTransient<ITheaterManager, TheaterManager>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -55,7 +79,8 @@ namespace BookMyShow
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                    pattern: "api/{controller}/{action?}/{id?}"
+);
             });
 
             app.UseSpa(spa =>

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -13,7 +13,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="dbup" Version="4.5.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.6" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +25,34 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\viewModels\viewModels.ts" />
+    <None Remove="Scripts\001_CreateMovietable.sql" />
+    <None Remove="Scripts\002_CreateSeatTable.sql" />
+    <None Remove="Scripts\003_CreateSeatingTable.sql" />
+    <None Remove="Scripts\004_CreateShowTable.sql" />
+    <None Remove="Scripts\005_CreateTheaterTable.sql" />
+    <None Remove="Scripts\006_CreateTicketTable.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\Migrations\001_CreateMovietable.sql" />
+    <EmbeddedResource Include="Scripts\Migrations\002_CreateSeatTable.sql" />
+    <EmbeddedResource Include="Scripts\Migrations\003_CreateSeatingTable.sql" />
+    <EmbeddedResource Include="Scripts\Migrations\004_CreateShowTable.sql" />
+    <EmbeddedResource Include="Scripts\Migrations\005_CreateTheaterTable.sql" />
+    <EmbeddedResource Include="Scripts\Migrations\006_CreateTicketTable.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BookMyShowModels\Models.csproj" />
+    <ProjectReference Include="..\BookMyShowServices\Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\viewModels\viewModels.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

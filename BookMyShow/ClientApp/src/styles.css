@@ -1,6 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Provide sufficient contrast against white background */
+
+.vwh-100{
+    min-height: 100vw;
+}
+
+.seat {
+  margin: 1% 1%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  min-height : 40px;
+  width : 8%;
+}
+
 a {
   color: #0366d6;
 }
@@ -13,4 +26,13 @@ code {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+
+.card-text {
+  height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* number of lines to show */
+  -webkit-box-orient: vertical;
 }
