@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace BookMyShow.Controllers
 {
     [ApiController]
-    [Route("Movie/{movieId}/Show")]
+    [Route("api/Movie/{movieId}/Show")]
     public class ShowController : ControllerBase
     {
         private IShowManager _showManager;
@@ -29,7 +29,7 @@ namespace BookMyShow.Controllers
             return result;
         }
 
-        [HttpGet("{id}")]
+        [Route("{id}")]
         public async Task<List<Seat>> GetShow(int id)
         {
             return await _showManager.GetSeatingData(id);

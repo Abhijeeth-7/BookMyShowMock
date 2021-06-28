@@ -9,7 +9,7 @@ using Models.ViewModels;
 namespace BookMyShow.Controllers
 {
     [ApiController]
-    [Route("Movie/{movieId}/Show/{showId}/Ticket")]
+    [Route("api/Movie/{movieId}/Show/{showId}/Ticket")]
     public class TicketController : ControllerBase
     {
         private IShowManager _showManager;
@@ -23,7 +23,7 @@ namespace BookMyShow.Controllers
             _ticketManager = ticketManager;
             _movieManager = movieManager;
         }
-        [HttpGet("")]
+        [HttpGet]
         public async Task<OrderSummary> GetOrderSummary(int showId)
         {
             Show show = await _showManager.GetShow(showId);

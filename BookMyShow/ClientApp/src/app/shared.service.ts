@@ -18,28 +18,28 @@ export class SharedService {
   }
 
   getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.baseUrl + 'Movie');
+    return this.http.get<Movie[]>(this.baseUrl + 'api/Movie');
   }
 
   getMovie(movieId?: number): Observable<Movie> {
     this.movieId = movieId || this.movieId;
-    return this.http.get<Movie>(this.baseUrl + 'Movie/' + this.movieId);
+    return this.http.get<Movie>(this.baseUrl + 'api/Movie/' + this.movieId);
   }
 
   getShows(): Observable<any[]> {
-    return this.http.get<any[]>(this.baseUrl + 'Movie/' + this.movieId + '/Show');
+    return this.http.get<any[]>(this.baseUrl + 'api/Movie/' + this.movieId + '/Show');
   }
 
   getSeatingPlan(showId?: number): Observable<Seat[]> {
     this.showId = showId || this.showId;
-    return this.http.get<Seat[]>(this.baseUrl + 'Movie/' + this.movieId + '/Show/' + this.showId);
+    return this.http.get<Seat[]>(this.baseUrl + 'api/Movie/' + this.movieId + '/Show/' + this.showId);
   }
 
   GetOrderSummary(): Observable<OrderSummary> {
-    return this.http.get<OrderSummary>(this.baseUrl + 'Movie/' + this.movieId + '/Show/' + this.showId + '/Ticket');
+    return this.http.get<OrderSummary>(this.baseUrl + 'api/Movie/' + this.movieId + '/Show/' + this.showId + '/Ticket');
   }
 
   ConfirmTicketBooking(ticket: Ticket): Observable<void> {
-    return this.http.post<void>(this.baseUrl + 'Movie/' + this.movieId + '/Show/' + this.showId + '/Ticket', ticket);
+    return this.http.post<void>(this.baseUrl + 'api/Movie/' + this.movieId + '/Show/' + this.showId + '/Ticket', ticket);
   }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace BookMyShow.Controllers
 {
     [ApiController]
-    [Route("Movie")]
+    [Route("api/Movie")]
     public class MovieController : ControllerBase
     {
         private IMovieManager _movieManager;
@@ -19,7 +19,7 @@ namespace BookMyShow.Controllers
         {
             return await _movieManager.GetMovies();
         }
-        [HttpGet("{id}")]
+        [Route("{id}")]
         public async Task<Movie> GetMovie(int id)
         {
             return await _movieManager.GetMovie(id);

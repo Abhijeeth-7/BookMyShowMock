@@ -11,6 +11,7 @@ using Services.Repository;
 using System;
 using System.Linq;
 using System.Reflection;
+using System.Web.Http;
 
 namespace BookMyShow
 {
@@ -78,7 +79,8 @@ namespace BookMyShow
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller}/{id?}");
+                    pattern: "api/{controller}/{action?}/{id?}"
+);
             });
 
             app.UseSpa(spa =>
