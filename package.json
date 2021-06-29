@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@angular/animations": "^12.1.0",
+    "ngx-toastr": "^13.2.1"
+  }
+}

@@ -11,6 +11,7 @@ export class ShowTimingsComponent implements OnInit {
 
   shows: Show[];
   theaters: Theater[];
+  movieTitle: string;
 
   constructor(private sharedService: SharedService, private route: ActivatedRoute, private router: Router) {  }
 
@@ -19,6 +20,7 @@ export class ShowTimingsComponent implements OnInit {
       this.shows = result.item1;
       this.theaters = result.item2;
     }, error => console.error(error));
+    this.movieTitle = history.state.movieTitle;
   }
 
   getTime(time: string) {
