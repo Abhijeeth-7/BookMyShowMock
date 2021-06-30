@@ -28,7 +28,7 @@ export class SeatBookingComponent implements OnInit {
     else {
       this.sharedService.getSeatingPlan(showId).subscribe(result => {
         this.seats = result;
-      }, error => this.toastr.error(error.message,`${error.status}`));
+      }, error => this.toastr.error(error.message,`Error Code ${error.status}`));
     }
     
   }

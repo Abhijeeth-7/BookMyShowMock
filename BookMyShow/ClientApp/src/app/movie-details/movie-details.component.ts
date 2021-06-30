@@ -27,7 +27,7 @@ export class MovieDetailsComponent implements OnInit {
     else {
       this.sharedService.getMovie(movieId).subscribe(result => {
         this.movie = result;
-      }, error => this.toastr.error(error.message, `${error.status}`));
+      }, error => this.toastr.error(error.message, `Error Code ${error.status}`));
     }
   }
 

@@ -16,7 +16,7 @@ export class HomeComponent {
   ngOnInit(): void {
     this.sharedService.getMovies().subscribe(result => {
       this.movies = result;
-    }, error => console.error(error));
+    }, error => this.toastr.error(error.message, `Error Code ${error.status}`));
   }
 
   selectMovie(movie: Movie) {

@@ -33,8 +33,8 @@ import { TicketBookingComponent } from './ticket-booking/ticket-booking.componen
       {
         positionClass: 'toast-top-full-width',
         closeButton: true,
-        timeOut: 10000,
-        progressBar: true
+        timeOut: 0,
+        //extendedTimeOut:0
       }
     ),
     RouterModule.forRoot([
