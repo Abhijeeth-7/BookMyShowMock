@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../shared.service';
 import { Show, Theater } from '../viewModels/viewModels';
+import { ToastrService } from 'ngx-toastr'
 
 @Component({
   selector: 'app-show-timings',
@@ -11,14 +12,16 @@ export class ShowTimingsComponent implements OnInit {
 
   shows: Show[];
   theaters: Theater[];
+  movieTitle: string;
 
-  constructor(private sharedService: SharedService, private route: ActivatedRoute, private router: Router) {  }
+  constructor(private sharedService: SharedService, private route: ActivatedRoute, private router: Router, private toastr:ToastrService) {  }
 
   ngOnInit() {
     this.sharedService.getShows().subscribe((result: { [index: string]: any }) => {
       this.shows = result.item1;
       this.theaters = result.item2;
-    }, error => console.error(error));
+    }, error => this.toastr.error(error.message, `Error Code ${error.status}`));
+    this.movieTitle = history.state.movieTitle;
   }
 
   getTime(time: string) {

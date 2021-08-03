@@ -1,3 +1,5 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -24,8 +26,17 @@ import { TicketBookingComponent } from './ticket-booking/ticket-booking.componen
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    ToastrModule.forRoot(
+      {
+        positionClass: 'toast-top-full-width',
+        closeButton: true,
+        timeOut: 0,
+        //extendedTimeOut:0
+      }
+    ),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'MovieDetails/:name', component: MovieDetailsComponent },
@@ -34,7 +45,8 @@ import { TicketBookingComponent } from './ticket-booking/ticket-booking.componen
       { path: 'MovieDetails/:name/Shows/:showId/Ticket', component: TicketBookingComponent },
     ])
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

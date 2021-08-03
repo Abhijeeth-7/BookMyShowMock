@@ -1,7 +1,8 @@
  import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../shared.service';
 import { OrderSummary, Ticket } from '../viewModels/viewModels';
+import { ToastrService } from 'ngx-toastr'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ticket-booking',
@@ -16,24 +17,28 @@ export class TicketBookingComponent implements OnInit {
     showId: number;
     seatIds: string[];
     isTicketBooked: boolean;
-    errorMsg: string;
+    preLoadText: string = "Getting Your Order Summary Please wait...";
 
-  constructor(private sharedService: SharedService, private route: ActivatedRoute, private router: Router) {
+  constructor(private sharedService: SharedService, private router: Router, private toastr: ToastrService) {
     this.date = new Date().toUTCString().slice(0, -3);
     try {
       this.showId = this.router.getCurrentNavigation().extras.state.showId;
       this.seatIds = this.router.getCurrentNavigation().extras.state.selectedSeats;
-    } catch (e) {
-      this.errorMsg = "Invalid Access, Try Booking Again by going back to Movies page";
+
+      this.sharedService.getOrderSummary().subscribe(result => {
+        this.orderSummary = result;
+        this.orderSummary.seatIds = this.seatIds;
+        this.orderSummary.totalPrice = this.orderSummary.ticketPrice * this.orderSummary.seatIds.length;
+      }, error => this.toastr.error(error.message, `${error.status}`));
+    }
+    catch (e) {
+      this.toastr.error("Please Go back to Movies page and Try Again", "Invalid Access");
+      this.preLoadText = "Invalid Access, Go back to Movies page and try again";
     }
   }
 
   ngOnInit() {
-    this.sharedService.GetOrderSummary().subscribe(result => {
-      this.orderSummary = result;
-      this.orderSummary.seatIds = this.seatIds;
-      this.orderSummary.totalPrice = this.orderSummary.ticketPrice * this.orderSummary.seatIds.length;
-    }, error => console.error(error));
+    
   }
 
   getTime(time: string) {
@@ -48,9 +53,10 @@ export class TicketBookingComponent implements OnInit {
 
   buyTickets() {
     this.createTicket();
-    this.sharedService.ConfirmTicketBooking(this.ticket).subscribe(data => {
+    this.sharedService.confirmTicketBooking(this.ticket).subscribe(data => {
       this.isTicketBooked = true;
-    }, error => console.error(error));
+      this.toastr.success("Your tickets have been booked successfully", "Booking Successful !!");
+    });
   }
 
   createTicket() {

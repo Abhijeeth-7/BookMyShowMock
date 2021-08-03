@@ -8,10 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Services.Data;
 using Services.Interfaces;
 using Services.Repository;
-using System;
-using System.Linq;
 using System.Reflection;
-using System.Web.Http;
 
 namespace BookMyShow
 {
